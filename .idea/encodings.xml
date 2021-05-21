@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/comment-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/comment-service/comment-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/comment-service/comment-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/comment-service/comment-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/comment-service/comment-provider/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/comment-service/comment-provider/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gateway" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-commons" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-commons/commons-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-commons/commons-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-commons/commons-lock" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-commons/commons-lock/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-commons/commons-lock/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-commons/commons-mq" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-commons/commons-mq/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-commons/commons-tool" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-commons/commons-tool/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-commons/commons-tool/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-parent" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/order-services/order-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/order-services/order-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/order-services/order-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/order-services/order-provider/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/order-services/order-provider/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shopping-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shopping-service/shopping-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shopping-service/shopping-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shopping-service/shopping-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shopping-service/shopping-provider/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shopping-service/shopping-provider/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user-service/user-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user-service/user-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user-service/user-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user-service/user-provider/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user-service/user-provider/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user-service/user-sdk" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user-service/user-sdk/src/main/java" charset="UTF-8" />
+  </component>
+</project>

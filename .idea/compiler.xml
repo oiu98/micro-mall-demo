@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="comment-api" />
+        <module name="order-api" />
+        <module name="comment-provider" />
+        <module name="commons-mq" />
+        <module name="commons-lock" />
+        <module name="order-provider" />
+        <module name="shopping-api" />
+        <module name="user-api" />
+        <module name="user-sdk" />
+        <module name="user-provider" />
+        <module name="commons-core" />
+        <module name="gateway" />
+        <module name="shopping-provider" />
+        <module name="commons-tool" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="comment-api" target="1.8" />
+      <module name="comment-provider" target="1.8" />
+      <module name="comment-service" target="1.8" />
+      <module name="commons-core" target="1.8" />
+      <module name="commons-lock" target="1.8" />
+      <module name="commons-mq" target="1.8" />
+      <module name="commons-tool" target="1.8" />
+      <module name="gateway" target="1.8" />
+      <module name="mall-commons" target="1.8" />
+      <module name="mall-parent" target="1.8" />
+      <module name="order-api" target="1.8" />
+      <module name="order-provider" target="1.8" />
+      <module name="order-services" target="1.8" />
+      <module name="shopping-api" target="1.8" />
+      <module name="shopping-provider" target="1.8" />
+      <module name="shopping-service" target="1.8" />
+      <module name="user-api" target="1.8" />
+      <module name="user-provider" target="1.8" />
+      <module name="user-sdk" target="1.8" />
+      <module name="user-service" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
