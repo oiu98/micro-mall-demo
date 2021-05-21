@@ -27,7 +27,7 @@
 				
 		   d. converter DO -> DTO
 		   
-		   
+    ---
     b. gateway: api 网关
 	   1) 有启动类，可以单独启动
 	   2) 只有gateway运行在tomcat容器中，需要依赖spring-boot-starter-web
