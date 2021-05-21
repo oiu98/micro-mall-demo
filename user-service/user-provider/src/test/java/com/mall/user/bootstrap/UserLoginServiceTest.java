@@ -1,6 +1,7 @@
 package com.mall.user.bootstrap;
 
 import com.alibaba.fastjson.JSON;
+import com.mall.user.ILoginService;
 import com.mall.user.dto.CheckAuthRequest;
 import com.mall.user.dto.CheckAuthResponse;
 import com.mall.user.dto.UserLoginRequest;
@@ -29,7 +30,7 @@ public class UserLoginServiceTest extends UserProviderApplicationTests {
         UserLoginRequest userLoginRequest = new UserLoginRequest();
         userLoginRequest.setUserName("test");
         userLoginRequest.setPassword("test");
-        UserLoginResponse loginResponse = userLoginService.login(userLoginRequest);
+        UserLoginResponse loginResponse = userLoginService.userLogin(userLoginRequest);
         System.out.println(JSON.toJSONString(loginResponse));
     }
 
