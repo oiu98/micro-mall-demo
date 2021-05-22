@@ -7,7 +7,6 @@ package com.mall.shopping.constant;
 public class GlobalConstants {
 
     public final static String HEADER_PANEL_CACHE_KEY="header_panel"; //导航栏板块缓存
-
     public final static int HEADER_PANEL_ID=0;//导航栏板块表id
 
     public final static int RECOMMEND_PANEL_ID=6;//推荐商品板块表id
@@ -24,6 +23,6 @@ public class GlobalConstants {
     public final static int HOMEPAGE_EXPIRE_TIME=1; //过期时间
 
 
-    public final static String CART_ITEM_CACHE_PREFIX="cart_item";
+    public final static String CART_ITEM_CACHE_PREFIX="cart_item"; // 购物车缓存前缀
 
 }
