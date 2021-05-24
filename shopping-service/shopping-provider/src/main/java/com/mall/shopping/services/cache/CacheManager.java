@@ -1,10 +1,15 @@
 package com.mall.shopping.services.cache;
 
+import com.mall.shopping.dto.CartProductDto;
 import org.redisson.api.RBucket;
+import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -35,5 +40,11 @@ public class CacheManager {
     public void expire(String key,int expire){
         RBucket rBucket = redissonClient.getBucket(key);
         rBucket.expire(expire,TimeUnit.DAYS);
+    }
+
+    public List<CartProductDto> getCartsCache(String key) {
+        RMap<String, CartProductDto> map = redissonClient.getMap(key);
+        List<CartProductDto> cartProductDtos = new ArrayList<>(map.values());
+        return cartProductDtos;
     }
 }

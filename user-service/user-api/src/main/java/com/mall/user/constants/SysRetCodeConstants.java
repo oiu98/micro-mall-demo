@@ -32,7 +32,8 @@ public enum SysRetCodeConstants {
     SYSTEM_TIMEOUT                      ("003098", "系统超时"),
     SYSTEM_ERROR                        ("003099", "系统错误"),
 
-    USERVERIFY_INFOR_INVALID            ("003200", "用户注册验证验证信息不合法");
+    USERVERIFY_INFOR_INVALID            ("003200", "用户注册验证验证信息不合法"),
+    USERVERIFY_INFOR_EXPIRED            ("003201","用户注册验证信息已过期");
 
     private String code;
     private String message;

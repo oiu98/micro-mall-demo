@@ -25,11 +25,4 @@ public interface ILoginService {
      * @return CheckAuthResponse
      */
     CheckAuthResponse validToken(CheckAuthRequest checkAuthRequest);
-
-
-    /**
-     * 用户退出
-     * @return ResponseData
-     */
-    ResponseData userLoginOut();
 }

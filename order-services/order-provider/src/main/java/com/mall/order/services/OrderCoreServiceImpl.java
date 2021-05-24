@@ -45,7 +45,6 @@ public class OrderCoreServiceImpl implements OrderCoreService {
 
 	/**
 	 * 创建订单的处理流程
-	 *
 	 * @param request
 	 * @return
 	 */

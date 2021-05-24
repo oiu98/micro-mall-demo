@@ -23,6 +23,6 @@ public class GlobalConstants {
     public final static int HOMEPAGE_EXPIRE_TIME=1; //过期时间
 
 
-    public final static String CART_ITEM_CACHE_PREFIX="cart_item"; // 购物车缓存前缀
+    public final static String CART_CACHE_PREFIX="cart_"; // 购物车缓存前缀
 
 }

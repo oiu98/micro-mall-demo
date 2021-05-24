@@ -1,6 +1,7 @@
 package com.mall.shopping.services;
 
 import com.mall.shopping.IContentService;
+import com.mall.shopping.constant.GlobalConstants;
 import com.mall.shopping.constants.ShoppingRetCode;
 import com.mall.shopping.converter.ContentConverter;
 import com.mall.shopping.dal.entitys.ItemCat;
@@ -43,7 +44,7 @@ public class ContentServiceImpl implements IContentService {
 
         try {
             PanelContent panelContent = new PanelContent();
-            panelContent.setPanelId(0);
+            panelContent.setPanelId(GlobalConstants.HEADER_PANEL_ID);
             List<PanelContent> panelContents = panelContentMapper.select(panelContent);
             List<PanelContentDto> panelContentDtos = contentConverter.panelContents2Dto(panelContents);
 

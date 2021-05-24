@@ -7,8 +7,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
-    create by ciggar
- * create-date: 2019/7/22-19:01
+ * @author ZhaoJiachen on 2021/5/21
+ * <p>
+ * Description: SpringMVC配置类
  */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -18,7 +19,7 @@ public class WebConfig implements WebMvcConfigurer {
         return new TokenIntercepter();
     }
     @Override
-    public void addInterceptors(InterceptorRegistry registry) {
+    public void addInterceptors(InterceptorRegistry registry) { // 启用全局拦截器
         registry.addInterceptor(tokenIntercepter())
 //                .addPathPatterns("/shopping/**")
 //                .addPathPatterns("/user/**")

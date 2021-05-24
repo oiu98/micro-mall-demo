@@ -1,6 +1,11 @@
 spring:
   profiles:
     active: dev
+  mail:
+    host: smtp.qq.com
+    port: 25
+    username: 479358584@qq.com
+    password: qhihudirpwwwbjba
 mybatis:
   mapper-locations: classpath*:com/mall/user/dal/persistence/*Mapper.xml"
   type-aliases-package: com.mall.user.dal.entitys

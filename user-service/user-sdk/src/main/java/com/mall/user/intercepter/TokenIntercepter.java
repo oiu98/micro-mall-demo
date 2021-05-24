@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.mall.commons.result.ResponseData;
 import com.mall.commons.result.ResponseUtil;
 import com.mall.commons.tool.utils.CookieUtil;
+import com.mall.user.ILoginService;
 import com.mall.user.annotation.Anoymous;
 import com.mall.user.constants.SysRetCodeConstants;
 import com.mall.user.dto.CheckAuthRequest;
@@ -18,14 +19,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
 /**
- * 用来实现token拦截认证
- *
- * 其实就是用来判断当前这个操作是否需要登录
+ * @author ZhaoJiachen on 2021/5/21
+ * <p>
+ * Description: 拦截器，用来实现token拦截认证
+ *              其实就是用来判断当前这个操作是否需要登录
  */
 public class TokenIntercepter extends HandlerInterceptorAdapter {
 
-//    @Reference(timeout = 3000,check = false)
-//    ILoginService iUserLoginService;
+    @Reference(timeout = 3000,check = false)
+    ILoginService userLoginService;
 
     public static String ACCESS_TOKEN="access_token";
 
@@ -43,12 +45,12 @@ public class TokenIntercepter extends HandlerInterceptorAdapter {
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "Origin,XRequested-With,Content-Type,Accept,Authorization,token");
 
-        if(!(handler instanceof HandlerMethod)){
+        if(!(handler instanceof HandlerMethod)){ // 判断是否为静态请求
             return true;
         }
         HandlerMethod handlerMethod=(HandlerMethod)handler;
         Object bean=handlerMethod.getBean();
-        // 判断
+        // 判断是否允许匿名访问
         if(isAnoymous(handlerMethod)){
             return true;
         }
@@ -64,14 +66,16 @@ public class TokenIntercepter extends HandlerInterceptorAdapter {
         //从token中获取用户信息
         CheckAuthRequest checkAuthRequest=new CheckAuthRequest();
         checkAuthRequest.setToken(token);
-//        CheckAuthResponse checkAuthResponse=iUserLoginService.validToken(checkAuthRequest);
-//        if(checkAuthResponse.getCode().equals(SysRetCodeConstants.SUCCESS.getCode())){
-//            request.setAttribute(USER_INFO_KEY,checkAuthResponse.getUserinfo()); //保存token解析后的信息后续要用
-//            return super.preHandle(request, response, handler);
-//        }
-//        ResponseData responseData=new ResponseUtil().setErrorMsg(checkAuthResponse.getMsg());
-//        response.setContentType("text/html;charset=UTF-8");
-//        response.getWriter().write(JSON.toJSON(responseData).toString());
+        CheckAuthResponse checkAuthResponse=userLoginService.validToken(checkAuthRequest);
+        if(checkAuthResponse.getCode().equals(SysRetCodeConstants.SUCCESS.getCode())){
+            request.setAttribute(USER_INFO_KEY,checkAuthResponse.getUserinfo()); //保存token解析后的信息后续要用
+            return super.preHandle(request, response, handler);
+        }
+
+        // 获取失败
+        ResponseData responseData=new ResponseUtil().setErrorMsg(checkAuthResponse.getMsg());
+        response.setContentType("text/html;charset=UTF-8");
+        response.getWriter().write(JSON.toJSON(responseData).toString());
         return false;
     }
 

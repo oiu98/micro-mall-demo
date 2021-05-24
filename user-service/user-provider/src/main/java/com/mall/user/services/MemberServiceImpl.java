@@ -1,7 +1,6 @@
-package com.mall.user.services;/**
- * Created by ciggar on 2019/7/30.
- */
+package com.mall.user.services;
 
+import com.mall.user.ILoginService;
 import com.mall.user.IMemberService;
 import com.mall.user.constants.SysRetCodeConstants;
 import com.mall.user.converter.MemberConverter;
@@ -15,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- *  ciggar
- * create-date: 2019/7/30-下午11:51
+ * @author ZhaoJiachen on 2021/5/21
+ * <p>
+ * Description: 用户信息相关的实现
+ *
  */
 @Slf4j
 @Component
@@ -26,8 +27,8 @@ public class MemberServiceImpl implements IMemberService {
     @Autowired
     MemberMapper memberMapper;
 
-//    @Autowired
-//    IUserLoginService userLoginService;
+    @Autowired
+    ILoginService loginService;
 
     @Autowired
     MemberConverter memberConverter;
@@ -60,7 +61,7 @@ public class MemberServiceImpl implements IMemberService {
     @Override
     public HeadImageResponse updateHeadImage(HeadImageRequest request) {
         HeadImageResponse response=new HeadImageResponse();
-        //TODO
+        // TODO 更新头像
         return response;
     }
 

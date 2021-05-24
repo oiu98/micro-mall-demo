@@ -33,7 +33,7 @@ public class AddressServiceImpl implements IAddressService {
 
     @Override
     public AddressListResponse addressList(AddressListRequest request) {
-        //TODO 地址信息要做缓存处理
+        // TODO 地址信息要做缓存处理
         AddressListResponse response=new AddressListResponse();
         try{
             request.requestCheck();

@@ -12,7 +12,7 @@ public class ExceptionUtil {
      * @param e Exception
      * @return
      */
-    public static AbstractResponse handlerException4biz(AbstractResponse response,Exception e) throws Exception {
+    public static AbstractResponse handlerException4biz(AbstractResponse response, Exception e) throws Exception {
         Exception ex = null;
         if (!(e instanceof Exception)) {
             return null;
@@ -20,13 +20,13 @@ public class ExceptionUtil {
         if (e instanceof ValidateException) {
             response.setCode(((ValidateException) e).getErrorCode());
             response.setMsg(e.getMessage());
-        }else if(e instanceof ProcessException) {
+        } else if (e instanceof ProcessException) {
             response.setCode(((ProcessException) e).getErrorCode());
             response.setMsg(e.getMessage());
-        }else if(e instanceof BizException) {
+        } else if (e instanceof BizException) {
             response.setCode(((BizException) e).getErrorCode());
             response.setMsg(e.getMessage());
-        }else if (e instanceof Exception) {
+        } else if (e instanceof Exception) {
             throw e; //处理不了，抛出去调用方处理
         }
         return response;

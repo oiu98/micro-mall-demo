@@ -68,7 +68,7 @@ public class JwtTokenUtils {
             decodedJWT = verifier.verify(token);
             log.info("签名人：" + decodedJWT.getIssuer() + " 加密方式：" + decodedJWT.getAlgorithm() + " 携带信息：" + decodedJWT.getClaim("user").asString());
         } catch (Exception e) {
-            log.info("jwt解密出现错误，jwt或私钥或签证人不正确");
+            log.info("jwt解密出现错误，jwt或私钥或签证人不正确 token : " + token);
             throw new ValidateException(SysRetCodeConstants.TOKEN_VALID_FAILED.getCode(),SysRetCodeConstants.TOKEN_VALID_FAILED.getMessage());
         }
         //获得token的头部，载荷和签名，只对比头部和载荷

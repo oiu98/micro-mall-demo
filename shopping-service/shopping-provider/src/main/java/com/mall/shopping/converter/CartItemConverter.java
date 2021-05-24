@@ -11,8 +11,6 @@ import com.mall.shopping.dto.CartProductDto;
 
 public class CartItemConverter {
 
-
-
     public static CartProductDto item2Dto(Item item){
         CartProductDto cartProduct =new CartProductDto();
         cartProduct.setProductId(item.getId());
