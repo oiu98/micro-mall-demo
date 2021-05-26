@@ -42,9 +42,4 @@ public class CacheManager {
         rBucket.expire(expire,TimeUnit.DAYS);
     }
 
-    public List<CartProductDto> getCartsCache(String key) {
-        RMap<String, CartProductDto> map = redissonClient.getMap(key);
-        List<CartProductDto> cartProductDtos = new ArrayList<>(map.values());
-        return cartProductDtos;
-    }
 }

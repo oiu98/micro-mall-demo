@@ -26,4 +26,13 @@ public interface ProductConverter {
     ProductDto item2Dto(Item item);
 
     List<ProductDto> items2Dto(List<Item> items);
+
+    @Mappings({
+            @Mapping(source = "id",target = "productId"),
+            @Mapping(source = "title",target = "productName"),
+            @Mapping(source = "price",target = "salePrice"),
+            @Mapping(source = "sellPoint",target = "subTitle"),
+            @Mapping(source = "imageBig",target = "productImageBig"),
+    })
+    ProductDetailDto item2DetailDto(Item item);
 }

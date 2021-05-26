@@ -1,10 +1,12 @@
 package com.mall.shopping.bootstrap;
 
+import com.mall.shopping.constant.GlobalConstants;
 import com.mall.shopping.dto.AddCartRequest;
 import com.mall.shopping.dto.AllProductCateRequest;
 import com.mall.shopping.dto.NavListResponse;
 import com.mall.shopping.dto.ProductDetailRequest;
 import com.mall.shopping.*;
+import com.mall.shopping.services.cache.CacheManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,16 @@ public class ShoppingProviderApplicationTests {
     public void testContentService() throws IOException {
         NavListResponse navListResponse = contentService.queryNavList();
         System.in.read();
+    }
+
+
+    @Autowired
+    CacheManager cacheManager;
+
+    @Test
+    public void testCache() {
+        String NavListCache = cacheManager.checkCache(GlobalConstants.HEADER_PANEL_CACHE_KEY);
+        System.out.println(NavListCache);
     }
 
 //    @Autowired

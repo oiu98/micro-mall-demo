@@ -7,9 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="comment-api" />
         <module name="order-api" />
-        <module name="comment-provider" />
         <module name="commons-mq" />
         <module name="commons-lock" />
         <module name="order-provider" />

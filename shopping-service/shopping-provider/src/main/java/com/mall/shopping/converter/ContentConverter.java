@@ -26,7 +26,9 @@ public interface ContentConverter {
     PanelContentDto panelContentItem2Dto(PanelContentItem panelContentItem);
 
     @Mappings({})
-    PanelDto panen2Dto(Panel panel);
+    PanelDto panel2Dto(Panel panel);
+
+    List<PanelDto> panels2Dto(List<Panel> panel);
 
     List<PanelContentDto> panelContents2Dto(List<PanelContent> panelContents);
 

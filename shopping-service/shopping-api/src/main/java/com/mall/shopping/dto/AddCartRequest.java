@@ -1,5 +1,7 @@
 package com.mall.shopping.dto;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mall.commons.result.AbstractRequest;
 import lombok.Data;
 
@@ -10,11 +12,12 @@ import lombok.Data;
 public class AddCartRequest extends AbstractRequest{
 
     private Long userId;
+    @JsonProperty(value = "productId")
     private Long itemId;
+    @JsonProperty(value = "productNum")
     private Integer num;
 
     @Override
     public void requestCheck() {
-
     }
 }

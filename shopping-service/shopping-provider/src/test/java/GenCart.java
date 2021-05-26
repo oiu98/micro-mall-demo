@@ -2,6 +2,7 @@ import com.mall.shopping.bootstrap.ShoppingProviderApplication;
 import com.mall.shopping.bootstrap.ShoppingProviderApplicationTests;
 import com.mall.shopping.dto.CartProductDto;
 import com.mall.shopping.services.cache.CartManager;
+import org.apache.ibatis.annotations.Result;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.redisson.api.RMap;
@@ -12,8 +13,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * @author ZhaoJiachen on 2021/5/23
@@ -49,7 +52,7 @@ public class GenCart {
 
     @Test
     public void testCartManager() {
-        List<CartProductDto> carts = cartManager.getCarts(String.valueOf(74));
+        List<CartProductDto> carts = cartManager.getCarts(71L);
         System.out.println(carts);
     }
 
@@ -59,4 +62,5 @@ public class GenCart {
         Collection<Object> values = cart_74.values();
         System.out.println(values);
     }
+
 }

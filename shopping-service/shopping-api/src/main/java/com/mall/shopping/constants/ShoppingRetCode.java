@@ -10,6 +10,8 @@ public enum ShoppingRetCode {
     SUCCESS                             ("000000", "成功"),
 
     REQUISITE_PARAMETER_NOT_EXIST       ("004073", "必要的参数不能为空"),
+    NOT_ALLOWED_REQUEST                 ("004074","请求不被允许"),
+    STOCK_SHORTAGE                      ("004075","库存不足"),
 
     DB_EXCEPTION                        ("004097", "数据库异常"),
     SYSTEM_TIMEOUT                      ("004098", "系统超时"),

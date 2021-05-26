@@ -97,6 +97,11 @@ public class LoginServiceImpl implements ILoginService {
         return userLoginResponse;
     }
 
+    /**
+     * 验证用户登录状态接口
+     * @param checkAuthRequest
+     * @return
+     */
     @Override
     public CheckAuthResponse validToken(CheckAuthRequest checkAuthRequest) {
 
