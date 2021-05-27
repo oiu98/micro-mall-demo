@@ -70,4 +70,24 @@ public class OrderCoreServiceImpl implements OrderCoreService {
 		return response;
 	}
 
+	/**
+	 * 取消订单的处理流程
+	 * @param request
+	 * @return
+	 */
+	@Override
+	public CancelOrderResponse cancelOrder(CancelOrderRequest request) {
+		return null;
+	}
+
+	/**
+	 * 删除订单的处理流程
+	 * @param request
+	 * @return
+	 */
+	@Override
+	public DeleteOrderResponse deleteOrder(DeleteOrderRequest request) {
+		return null;
+	}
+
 }

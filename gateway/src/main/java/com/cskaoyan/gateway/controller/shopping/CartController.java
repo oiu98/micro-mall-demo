@@ -7,6 +7,7 @@ import com.mall.commons.tool.utils.CookieUtil;
 import com.mall.shopping.ICartService;
 import com.mall.shopping.constants.ShoppingRetCode;
 import com.mall.shopping.dto.*;
+import com.mall.user.intercepter.TokenIntercepter;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
@@ -32,8 +33,6 @@ import java.util.Map;
 @RequestMapping("/shopping")
 @Api(tags = "CartController", description = "购物车控制层")
 public class CartController {
-
-    public static String USER_INFO_KEY = "userInfo";
 
     @Reference(timeout = 3000, check = false)
     ICartService cartService;
@@ -168,7 +167,7 @@ public class CartController {
      */
     private Map checkUserInfo(HttpServletRequest request) {
         // 从cookie中获取token
-        String userInfo = (String) request.getAttribute(USER_INFO_KEY);
+        String userInfo = (String) request.getAttribute(TokenIntercepter.USER_INFO_KEY);
         try {
             return new ObjectMapper().readValue(userInfo, Map.class);
         } catch (IOException e) {

@@ -65,6 +65,10 @@ public class LoginServiceImpl implements ILoginService {
                     .andEqualTo("password", md5_passwd);
             List<Member> members = memberMapper.selectByExample(memberExample);
 
+            if (members.size() == 0) {
+                throw new ValidateException(SysRetCodeConstants.USERORPASSWORD_ERRROR.getCode(),
+                                            SysRetCodeConstants.USERORPASSWORD_ERRROR.getMessage());
+            }
             Member member = members.get(0);
             // 是否激活
             if ("N".equals(member.getIsVerified())) {

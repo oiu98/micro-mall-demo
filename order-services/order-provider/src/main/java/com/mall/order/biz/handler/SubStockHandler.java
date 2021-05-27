@@ -2,8 +2,10 @@ package com.mall.order.biz.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.mall.commons.tool.exception.BizException;
+import com.mall.order.biz.context.AbsTransHandlerContext;
 import com.mall.order.biz.context.CreateOrderContext;
 import com.mall.order.biz.context.TransHandlerContext;
+import com.mall.order.constant.OrderRetCode;
 import com.mall.order.dal.entitys.Stock;
 import com.mall.order.dal.persistence.OrderItemMapper;
 import com.mall.order.dal.persistence.StockMapper;
@@ -38,8 +40,52 @@ public class SubStockHandler extends AbstractTransHandler {
 	@Override
 	@Transactional
 	public boolean handle(TransHandlerContext context) {
+		// 向下转型
+		CreateOrderContext createOrderContext = (CreateOrderContext) context;
 
+		// 获得订单商品列表
+		List<CartProductDto> cartProductDtoList = createOrderContext.getCartProductDtoList();
 
-        return true;
+		// 获得订单商品id列表
+		List<Long> buyProductIds = createOrderContext.getBuyProductIds();
+		if (CollectionUtils.isEmpty(buyProductIds)) { // 如果为空，手动生成
+			buyProductIds = cartProductDtoList.stream()
+							.map(productDto -> productDto.getProductId())
+							.collect(Collectors.toList());
+		}
+		buyProductIds.sort(Long::compareTo); // 排序
+		createOrderContext.setBuyProductIds(buyProductIds); // productIds放入context
+
+		// 锁定库存
+		List<Stock> stockList = stockMapper.findStocksForUpdate(buyProductIds);
+		if (CollectionUtils.isEmpty(stockList)) {
+			throw new BizException("库存未初始化！");
+		}
+
+		if (stockList.size() != buyProductIds.size()) {
+			throw new BizException("部分商品库存未初始化！");
+		}
+
+		// 冻结库存
+		cartProductDtoList.parallelStream().forEach(cartProductDto -> {
+			// 获得参数
+			Long productId = cartProductDto.getProductId();
+			Long productNum = cartProductDto.getProductNum();
+			Long limitNum = cartProductDto.getLimitNum();
+			if (limitNum < productNum) { // 购买数量超过限制
+				throw new BizException("购买数量超过限制！");
+			}
+			// 冻结库存
+			Stock stock = new Stock();
+			stock.setItemId(productId);
+			stock.setStockCount(-productNum);
+			stock.setLockCount(productNum.intValue());
+			Integer effectedRows = stockMapper.updateStock(stock);
+			if (effectedRows == 0) { // 库存不足
+				throw new BizException("库存不足！");
+			}
+		});
+
+		return true;
 	}
 }

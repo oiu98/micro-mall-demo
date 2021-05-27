@@ -12,8 +12,10 @@ import java.util.List;
  * @Date: 2019-09-16 00:09
  **/
 public interface StockMapper extends TkMapper<Stock> {
- void updateStock(Stock stock);
+ Integer updateStock(Stock stock);
+
  Stock selectStockForUpdate(Long itemId);
+
  Stock selectStock(Long itemId);
 
  List<Stock> findStocksForUpdate(@Param("itemIds")List<Long> itemIds);

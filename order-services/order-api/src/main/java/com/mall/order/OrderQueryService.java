@@ -8,6 +8,18 @@ import com.mall.order.dto.*;
  */
 public interface OrderQueryService {
 
+    /**
+     * 获取当前用户的所有订单
+     * @param request
+     * @return
+     */
+    OrderListResponse getOrderList(OrderListRequest request);
 
+    /**
+     * 查询订单详情
+     * @param request
+     * @return
+     */
+    OrderItemResponse getOrderItem(OrderItemRequest request);
 
 }

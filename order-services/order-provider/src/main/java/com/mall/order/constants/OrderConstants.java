@@ -3,7 +3,7 @@ package com.mall.order.constants;/**
  */
 
 /**
- *  ciggar
+ * ciggar
  * create-date: 2019/7/30-下午11:42
  */
 public class OrderConstants {

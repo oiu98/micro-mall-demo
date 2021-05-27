@@ -39,7 +39,7 @@ public class CartServiceImpl implements ICartService {
     private StockMapper stockMapper;
 
     /**
-     *  获取购物车列表接口
+     * 获取购物车列表接口
      */
     @Override
     public CartListByIdResponse getCartListById(CartListByIdRequest request) {
@@ -67,6 +67,7 @@ public class CartServiceImpl implements ICartService {
 
     /**
      * 添加购物车接口
+     *
      * @param request
      * @return
      */
@@ -87,14 +88,14 @@ public class CartServiceImpl implements ICartService {
             Stock stock = stockMapper.selectStock(itemId);
             if (stock.getStockCount() < num) { // 库存不足
                 throw new ProcessException(ShoppingRetCode.STOCK_SHORTAGE.getCode(),
-                                            ShoppingRetCode.STOCK_SHORTAGE.getMessage());
+                        ShoppingRetCode.STOCK_SHORTAGE.getMessage());
             }
             Item item = itemMapper.selectByPrimaryKey(itemId);
             CartProductDto cartProductDto = CartItemConverter.item2Dto(item);
             cartProductDto.setProductNum(Long.valueOf(num));
             cartProductDto.setChecked("true");
             // 保存进redis中
-            cartManager.addCartProduct(userId,cartProductDto);
+            cartManager.addCartProduct(userId, cartProductDto);
 
             response.setCode(ShoppingRetCode.SUCCESS.getCode());
             response.setMsg(ShoppingRetCode.SUCCESS.getMessage());
@@ -108,6 +109,7 @@ public class CartServiceImpl implements ICartService {
 
     /**
      * 更新购物车接口
+     *
      * @param request
      * @return
      */
@@ -130,7 +132,7 @@ public class CartServiceImpl implements ICartService {
                         ShoppingRetCode.STOCK_SHORTAGE.getMessage());
             }
             // 更新redis中
-            cartManager.updateCartProduct(userId,request);
+            cartManager.updateCartProduct(userId, request);
 
             response.setCode(ShoppingRetCode.SUCCESS.getCode());
             response.setMsg(ShoppingRetCode.SUCCESS.getMessage());
@@ -144,6 +146,7 @@ public class CartServiceImpl implements ICartService {
 
     /**
      * 选中购物车所有商品接口
+     *
      * @param request
      * @return
      */
@@ -154,6 +157,7 @@ public class CartServiceImpl implements ICartService {
 
     /**
      * 删除购物车商品接口
+     *
      * @param request
      * @return
      */
@@ -170,7 +174,7 @@ public class CartServiceImpl implements ICartService {
             Long itemId = request.getItemId();
 
             // 更新redis中
-            cartManager.deleteCartProduct(userId,itemId);
+            cartManager.deleteCartProduct(userId, itemId);
 
             response.setCode(ShoppingRetCode.SUCCESS.getCode());
             response.setMsg(ShoppingRetCode.SUCCESS.getMessage());
@@ -184,6 +188,7 @@ public class CartServiceImpl implements ICartService {
 
     /**
      * 删除购物车选中商品接口
+     *
      * @param request
      * @return
      */
@@ -213,11 +218,30 @@ public class CartServiceImpl implements ICartService {
 
     /**
      * 清空指定用户的购物车缓存(用户下完订单之后清理）
+     *
      * @param request
      * @return
      */
     @Override
     public ClearCartItemResponse clearCartItemByUserID(ClearCartItemRequest request) {
-        return null;
+        ClearCartItemResponse response = new ClearCartItemResponse();
+
+        try {
+            // 参数校验
+            request.requestCheck();
+
+            // 获得参数
+            Long userId = request.getUserId();
+            List<Long> productIds = request.getProductIds();
+            cartManager.deleteCheckedCartProduct(userId, productIds);
+
+            response.setCode(ShoppingRetCode.SUCCESS.getCode());
+            response.setMsg(ShoppingRetCode.SUCCESS.getMessage());
+        } catch (Exception e) {
+            log.error("CartServiceImpl.clearCartItemByUserID occur Exception :" + e);
+            ExceptionProcessorUtils.wrapperHandlerException(response, e);
+        }
+
+        return response;
     }
 }

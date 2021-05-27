@@ -38,8 +38,17 @@ public class ValidateHandler extends AbstractTransHandler {
 
     @Override
     public boolean handle(TransHandlerContext context) {
+        // 向下转型
+        CreateOrderContext createOrderContext = (CreateOrderContext) context;
 
-
+        Long userId = createOrderContext.getUserId();
+        // 查询userId是否存在
+        QueryMemberRequest request = new QueryMemberRequest();
+        request.setUserId(userId);
+        QueryMemberResponse response = memberService.queryMemberById(request);
+        if (!response.getCode().equals(SysRetCodeConstants.SUCCESS.getCode())) {
+            throw new BizException(OrderRetCode.DB_EXCEPTION.getCode(),OrderRetCode.DB_EXCEPTION.getMessage());
+        }
 
         return true;
     }

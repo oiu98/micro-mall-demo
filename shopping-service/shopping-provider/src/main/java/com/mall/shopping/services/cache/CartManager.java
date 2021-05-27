@@ -33,9 +33,9 @@ public class CartManager {
         return cartProductDtos;
     }
 
-    public void addCartProduct(Long uid,CartProductDto cartProductDto){
+    public void addCartProduct(Long uid, CartProductDto cartProductDto) {
         RMap<String, CartProductDto> map = redissonClient.getMap(GlobalConstants.CART_CACHE_PREFIX + uid);
-        map.put(String.valueOf(cartProductDto.getProductId()),cartProductDto);
+        map.put(String.valueOf(cartProductDto.getProductId()), cartProductDto);
     }
 
     public void updateCartProduct(Long uid, UpdateCartNumRequest request) {
@@ -43,19 +43,29 @@ public class CartManager {
         CartProductDto cartProductDto = map.get(String.valueOf(request.getItemId()));
         cartProductDto.setProductNum(Long.valueOf(request.getNum()));
         cartProductDto.setChecked(request.getChecked());
-        map.put(String.valueOf(cartProductDto.getProductId()),cartProductDto);
+        map.put(String.valueOf(cartProductDto.getProductId()), cartProductDto);
     }
 
     public void deleteCartProduct(Long uid, Long pid) {
         RMap<String, CartProductDto> map = redissonClient.getMap(GlobalConstants.CART_CACHE_PREFIX + uid);
-        map.remove(pid);
+        map.remove(String.valueOf(pid));
     }
 
     public void deleteCheckedCartProduct(Long uid) {
         RMap<String, CartProductDto> map = redissonClient.getMap(GlobalConstants.CART_CACHE_PREFIX + uid);
         map.values().parallelStream().forEach(cartProductDto -> {
             if ("true".equals(cartProductDto.getChecked())) {
-                map.remove(cartProductDto.getProductId());
+                map.remove(String.valueOf(cartProductDto.getProductId()));
+            }
+        });
+    }
+
+    public void deleteCheckedCartProduct(Long uid, List<Long> productIds) {
+        RMap<String, CartProductDto> map = redissonClient.getMap(GlobalConstants.CART_CACHE_PREFIX + uid);
+        map.values().parallelStream().forEach(cartProductDto -> {
+            if ("true".equals(cartProductDto.getChecked())
+                    && productIds.contains(cartProductDto.getProductId())) {
+                map.remove(String.valueOf(cartProductDto.getProductId()));
             }
         });
     }

@@ -1,6 +1,4 @@
-package com.mall.order.biz.factory;/**
- * Created by ciggar on 2019/8/2.
- */
+package com.mall.order.biz.factory;
 
 import com.mall.commons.result.AbstractRequest;
 import com.mall.order.biz.handler.DefaultTransPipeline;
@@ -11,7 +9,7 @@ import com.mall.order.biz.TransOutboundInvoker;
 import com.mall.order.biz.convert.TransConvert;
 
 /**
- *  ciggar
+ * ciggar
  * create-date: 2019/8/2-下午10:30
  */
 public abstract class AbstranctTransPipelineFactory <T extends AbstractRequest> implements TransPipelineFactory<T>{
@@ -36,8 +34,10 @@ public abstract class AbstranctTransPipelineFactory <T extends AbstractRequest> 
 
         //创建管道
         TransPipeline pipeline = createPipeline(context);
+
         //build管道
         doBuild(pipeline);
+
         //返回
         return pipeline;
     }

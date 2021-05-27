@@ -15,9 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- *  ciggar
+ * ciggar
  * create-date: 2019/8/2-下午10:52
- *
+ * <p>
  * 构建订单处理链
  */
 @Slf4j
@@ -40,18 +40,18 @@ public class OrderProcessPipelineFactory extends AbstranctTransPipelineFactory<C
 
     @Override
     protected TransHandlerContext createContext() {
-        CreateOrderContext createOrderContext=new CreateOrderContext();
+        CreateOrderContext createOrderContext = new CreateOrderContext();
         return createOrderContext;
     }
 
     @Override
     protected void doBuild(TransPipeline pipeline) {
-        pipeline.addLast(validateHandler);
-        pipeline.addLast(subStockHandler);
-        pipeline.addLast(initOrderHandler);
-        pipeline.addLast(logisticalHandler);
-        pipeline.addLast(clearCartItemHandler);
-        pipeline.addLast(sendMessageHandler);
+        pipeline.addLast(validateHandler); // 验证用户合法性
+        pipeline.addLast(subStockHandler); // 扣减库存
+        pipeline.addLast(initOrderHandler); // 初始化订单
+        pipeline.addLast(logisticalHandler); // 生成邮寄表
+        pipeline.addLast(clearCartItemHandler); // 清空购物车中购买的商品
+        pipeline.addLast(sendMessageHandler); // 发送订单超时取消的消息
     }
 
     @Override

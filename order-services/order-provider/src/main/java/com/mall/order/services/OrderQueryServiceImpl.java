@@ -30,4 +30,23 @@ import java.util.List;
 @Service
 public class OrderQueryServiceImpl implements OrderQueryService {
 
+    /**
+     * 获取所有订单的处理流程
+     * @param request
+     * @return
+     */
+    @Override
+    public OrderListResponse getOrderList(OrderListRequest request) {
+        return null;
+    }
+
+    /**
+     * 获取订单详情的处理流程
+     * @param request
+     * @return
+     */
+    @Override
+    public OrderItemResponse getOrderItem(OrderItemRequest request) {
+        return null;
+    }
 }
