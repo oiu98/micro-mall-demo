@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="pay-api" />
         <module name="order-api" />
         <module name="commons-mq" />
         <module name="commons-lock" />
@@ -14,7 +15,10 @@
         <module name="shopping-api" />
         <module name="user-api" />
         <module name="user-sdk" />
+        <module name="pay-provider" />
+        <module name="promotion-provider" />
         <module name="user-provider" />
+        <module name="promotion-api" />
         <module name="commons-core" />
         <module name="gateway" />
         <module name="shopping-provider" />
@@ -22,9 +26,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="comment-api" target="1.8" />
-      <module name="comment-provider" target="1.8" />
-      <module name="comment-service" target="1.8" />
       <module name="commons-core" target="1.8" />
       <module name="commons-lock" target="1.8" />
       <module name="commons-mq" target="1.8" />
@@ -35,6 +36,12 @@
       <module name="order-api" target="1.8" />
       <module name="order-provider" target="1.8" />
       <module name="order-services" target="1.8" />
+      <module name="pay-api" target="1.8" />
+      <module name="pay-provider" target="1.8" />
+      <module name="pay-service" target="1.8" />
+      <module name="promotion-api" target="1.8" />
+      <module name="promotion-provider" target="1.8" />
+      <module name="promotion-service" target="1.8" />
       <module name="shopping-api" target="1.8" />
       <module name="shopping-provider" target="1.8" />
       <module name="shopping-service" target="1.8" />

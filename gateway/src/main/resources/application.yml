@@ -3,5 +3,8 @@ spring:
     name: gateway
   profiles:
     active: dev
+  mvc:
+    static-path-pattern: /images/**
 server:
   port: 8080
+

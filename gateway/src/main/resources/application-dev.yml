@@ -15,3 +15,6 @@ dubbo:
   scan:
     base-packages: com.cskaoyan.gateway
 captchaFlag : false
+spring:
+  resources:
+    static-locations: file:D:\test\

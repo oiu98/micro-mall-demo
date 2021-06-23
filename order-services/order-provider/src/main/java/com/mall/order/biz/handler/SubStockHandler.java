@@ -67,7 +67,7 @@ public class SubStockHandler extends AbstractTransHandler {
 		}
 
 		// 冻结库存
-		cartProductDtoList.parallelStream().forEach(cartProductDto -> {
+		cartProductDtoList.stream().forEach(cartProductDto -> {
 			// 获得参数
 			Long productId = cartProductDto.getProductId();
 			Long productNum = cartProductDto.getProductNum();

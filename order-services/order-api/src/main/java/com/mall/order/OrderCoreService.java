@@ -30,5 +30,18 @@ public interface OrderCoreService {
      */
     DeleteOrderResponse deleteOrder(DeleteOrderRequest request);
 
+    /**
+     * 更新订单的支付状态
+     * @param orderId
+     * @param isSuccess
+     * @return
+     */
+    boolean updatePaymentStatus(String orderId, boolean isSuccess);
 
+    /**
+     * 更新库存
+     * @param orderId
+     * @param isSuccess
+     */
+    void updateStock(String orderId, boolean isSuccess);
 }

@@ -19,6 +19,10 @@ public class CreateSeckillOrderRequest extends AbstractRequest {
     private String username;
     private Long productId;
     private BigDecimal price;
+    private Long addressId;
+    private String tel;
+    private String streetName;
+
     @Override
     public void requestCheck() {
 

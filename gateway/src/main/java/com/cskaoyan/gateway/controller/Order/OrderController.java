@@ -6,19 +6,18 @@ import com.mall.commons.result.ResponseUtil;
 import com.mall.order.OrderCoreService;
 import com.mall.order.OrderQueryService;
 import com.mall.order.constant.OrderRetCode;
-import com.mall.order.dto.CreateOrderRequest;
-import com.mall.order.dto.CreateOrderResponse;
+import com.mall.order.dto.*;
 import com.mall.shopping.constants.ShoppingRetCode;
 import com.mall.user.intercepter.TokenIntercepter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,7 +30,7 @@ import java.util.Map;
 @RequestMapping("/shopping")
 public class OrderController {
 
-    @Reference(timeout = 3000,check = false)
+    @Reference(timeout = 6000,check = false,retries = 0)
     private OrderCoreService orderCoreService;
     @Reference(timeout = 3000,check = false)
     private OrderQueryService orderQueryService;
@@ -59,14 +58,62 @@ public class OrderController {
     /**
      * 获取当前⽤户的所有订单
      */
+    @GetMapping("/order")
+    public ResponseData getOrderList(OrderListRequest orderListRequest,HttpServletRequest request) {
+        Map userInfos = checkUserInfo(request);
+        if (userInfos == null) {
+            new ResponseUtil<>().setErrorMsg(ShoppingRetCode.REQUISITE_PARAMETER_NOT_EXIST.getMessage());
+        }
+        Long uid = Long.valueOf((Integer) userInfos.get("uid"));
+
+        // 调用服务接口
+        orderListRequest.setUserId(uid);
+        OrderListResponse orderListResponse = orderQueryService.getOrderList(orderListRequest);
+
+        if (!orderListResponse.getCode().equals(OrderRetCode.SUCCESS.getCode())) {
+            return new ResponseUtil<>().setErrorMsg(orderListResponse.getMsg());
+        }
+
+        Map<String,Object> result = new HashMap<>();
+        result.put("data",orderListResponse.getDetailInfoList());
+        result.put("total",orderListResponse.getTotal());
+        return new ResponseUtil<>().setData(result);
+    }
 
     /**
      *  查询订单详情
      */
+    @GetMapping("/order/{id}")
+    public ResponseData getOrderItem(@PathVariable(value = "id")String orderId, HttpServletRequest request) {
+        Map userInfos = checkUserInfo(request);
+        if (userInfos == null) {
+            new ResponseUtil<>().setErrorMsg(ShoppingRetCode.REQUISITE_PARAMETER_NOT_EXIST.getMessage());
+        }
+        Long uid = Long.valueOf((Integer) userInfos.get("uid"));
+
+        OrderDetailRequest orderDetailRequest = new OrderDetailRequest();
+        orderDetailRequest.setOrderId(orderId);
+        // 调用服务接口
+        OrderDetailResponse response = orderQueryService.getOrderDetail(orderDetailRequest);
+        if (!response.getCode().equals(OrderRetCode.SUCCESS.getCode())) {
+            return new ResponseUtil<>().setErrorMsg(response.getMsg());
+        }
+
+        Map<String,Object> result = new HashMap<>();
+        result.put("userId",response.getUserId());
+        result.put("userName",response.getOrderShippingDto().getReceiverName());
+        result.put("orderTotal",response.getPayment());
+        result.put("orderStatus",response.getStatus());
+        result.put("streetName",response.getOrderShippingDto().getReceiverAddress());
+        result.put("tel",response.getOrderShippingDto().getReceiverPhone());
+        result.put("goodsList",response.getOrderItemDto());
+        return new ResponseUtil<>().setData(result);
+    }
 
     /**
      *  取消订单
      */
+
 
     /**
      *  删除订单

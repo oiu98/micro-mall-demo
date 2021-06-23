@@ -22,6 +22,8 @@ public interface OrderConverter {
     @Mappings({})
     OrderDetailInfo order2detail(Order order);
 
+    List<OrderDetailInfo> order2details(List<Order> order);
+
     @Mappings({})
     OrderItemDto item2dto(OrderItem item);
 
