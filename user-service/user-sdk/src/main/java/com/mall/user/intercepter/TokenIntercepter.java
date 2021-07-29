@@ -79,13 +79,13 @@ public class TokenIntercepter extends HandlerInterceptorAdapter {
         return false;
     }
 
-    private boolean isAnoymous(HandlerMethod handlerMethod){
+    private boolean isAnoymous(HandlerMethod handlerMethod) {
         // 获取包含该handlerMethod对象所表示的那个方法的controller对象
         Object bean=handlerMethod.getBean();
 
         // 获取controller对象对应的字节码对象
         Class clazz=bean.getClass();
-        if(clazz.getAnnotation(Anoymous.class)!=null){ // 判断类上有没有匿名访问的注解
+        if(clazz.getAnnotation(Anoymous.class)!=null) { // 判断类上有没有匿名访问的注解
             return true;
         }
         Method method=handlerMethod.getMethod();

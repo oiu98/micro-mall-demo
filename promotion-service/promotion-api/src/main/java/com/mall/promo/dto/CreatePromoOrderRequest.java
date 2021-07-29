@@ -1,6 +1,5 @@
 package com.mall.promo.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mall.commons.result.AbstractRequest;
 import com.mall.commons.tool.exception.ValidateException;
 import com.mall.promo.constant.PromoRetCode;
@@ -35,7 +34,6 @@ public class CreatePromoOrderRequest extends AbstractRequest {
     /**
      * 用户名
      */
-    @JsonProperty("userName")
     private String username;
 
     /**
